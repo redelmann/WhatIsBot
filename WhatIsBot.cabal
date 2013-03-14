@@ -1,0 +1,23 @@
+name:              WhatIsBot
+version:           1.0
+author:            Romain Edelmann
+maintainer:        Romain Edelmann <romain.edelmann@gmail.com>
+synopsis:          IRC bot that decides in which category falls a given starcraft user name. 
+description:       IRC bot that decides in which category falls a given starcraft user name. Is it a Pokemon, a pharmaceutical product or an ancient historian?
+cabal-version:     >= 1.6
+build-type:        Simple
+category:          IRC, StarCraft
+license:           BSD3
+license-file:      LICENSE
+
+source-repository head
+  type:            git
+  location:        https://github.com/redelmann/WhatIsBot
+
+executable whatisbot
+  main-is:         Main.hs
+  build-depends:   base, containers, optparse-applicative, network, mtl
+
+executable whatisbot-local
+  main-is:         Local.hs
+  build-depends:   base, containers
