@@ -16,7 +16,7 @@ source-repository head
 
 executable whatisbot
   main-is:         Main.hs
-  build-depends:   base, containers, optparse-applicative, network, mtl
+  build-depends:   base, containers, optparse-applicative, network, mtl, irc
 
 executable whatisbot-local
   main-is:         Local.hs

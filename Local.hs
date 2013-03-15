@@ -1,11 +1,13 @@
-
 module Main(main) where
 
-import Classifier
-import Data.Map (fromList)
 import Control.Monad (forM_)
+
+import Data.Map (fromList)
 import Data.Functor ((<$>))
 
+import Classifier
+
+-- | Reads user names from stdin and prints out their classification to sdtout.
 main :: IO ()
 main = do
     models <- learn $ fromList 
