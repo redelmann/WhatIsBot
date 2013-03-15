@@ -110,7 +110,7 @@ run = do
     mapM_ processMessage initMsgs
     -- Connect to the specified channel.
     setChan
-    -- | Greet everyone!
+    -- Greet everyone!
     printGreetings
     -- Process all messages.
     mapM_ processMessage msgs
