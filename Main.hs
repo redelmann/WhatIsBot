@@ -3,6 +3,7 @@ module Main(main) where
 import Network
 import Network.IRC hiding (nick, user)
 import System.IO
+import System.FilePath
 
 import Control.Monad (forever, replicateM_, mapM_, when)
 import Control.Monad.Reader hiding (reader)
@@ -25,15 +26,38 @@ data Options = Options
     , port     :: Integer
     , chan     :: String
     , user     :: String
-    , nick     :: String }
+    , nick     :: String
+    , path     :: FilePath }
 
 -- | Parser for the options.
 optionsParser :: Parser Options
-optionsParser = Options <$> strOption (short 's' <> long "server" <> metavar "SERVER")
-                        <*> option (short 'p' <> long "port" <> metavar "PORT")
-                        <*> strOption (short 'c' <> long "channel" <> metavar "CHAN")
-                        <*> strOption (short 'u' <> long "user" <> metavar "USER")
-                        <*> strOption (short 'n' <> long "nickname" <> metavar "NICK")
+optionsParser = Options <$> strOption (short 's'
+                                    <> long "server" 
+                                    <> help "IRC server address"
+                                    <> metavar "SERVER")
+                        <*> option (short 'p' 
+                                    <> long "port"
+                                    <> help "IRC server port"
+                                    <> value 6667
+                                    <> metavar "PORT")
+                        <*> strOption (short 'c' 
+                                    <> long "channel"
+                                    <> help "IRC channel to use"
+                                    <> metavar "CHAN")
+                        <*> strOption (short 'u' 
+                                    <> long "user" 
+                                    <> help "IRC user name"
+                                    <> metavar "USER")
+                        <*> strOption (short 'n' 
+                                    <> long "nickname"
+                                    <> help "IRC nick name"
+                                    <> value "WhatIsBot"
+                                    <> metavar "NICK")
+                        <*> strOption (short 'd' 
+                                    <> long "directory"
+                                    <> help "Directory in which resources files are located"
+                                    <> value "resources"
+                                    <> metavar "DIR")
 
 -- | Informations needed by the Bot.
 data Infos = Infos 
@@ -74,11 +98,13 @@ probe s f m = do
 -- | Setup the Bot. Builds the models, connect to the server and launches the reader and writer processes. 
 setup :: Options -> IO Infos
 setup os = do
+
+    let p = path os
     -- Building models.
     ms <- learn $ M.fromList 
-        [ ("a Pokemon", "resources/pokemons1st.txt")
-        , ("a pharmaceutical product", "resources/pharma.txt")
-        , ("an ancient historian", "resources/historians.txt") ]
+        [ ("a Pokemon", p </> "pokemons1st.txt")
+        , ("a pharmaceutical product", p </> "pharma.txt")
+        , ("an ancient historian", p </> "historians.txt") ]
 
     -- Connecting to the specified IRC server.
     h <- connectTo (server os) (PortNumber (fromIntegral $ port os))
