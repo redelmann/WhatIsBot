@@ -17,10 +17,10 @@ data Options = Options { path :: FilePath }
 -- | Parser for the options.
 optionsParser :: Parser Options
 optionsParser = Options <$> strOption (short 'd' 
-                                    <> long "directory"
-                                    <> help "Directory in which resources files are located"
-                                    <> value "resources"
-                                    <> metavar "DIR")
+                            <> long "directory"
+                            <> help "Directory in which resources files are located"
+                            <> value "resources"
+                            <> metavar "DIR")
 
 -- | Reads user names from stdin and prints out their classification to sdtout.
 main :: IO ()

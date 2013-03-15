@@ -32,32 +32,32 @@ data Options = Options
 -- | Parser for the options.
 optionsParser :: Parser Options
 optionsParser = Options <$> strOption (short 's'
-                                    <> long "server" 
-                                    <> help "IRC server address"
-                                    <> metavar "SERVER")
+                            <> long "server" 
+                            <> help "IRC server address"
+                            <> metavar "SERVER")
                         <*> option (short 'p' 
-                                    <> long "port"
-                                    <> help "IRC server port"
-                                    <> value 6667
-                                    <> metavar "PORT")
+                            <> long "port"
+                            <> help "IRC server port"
+                            <> value 6667
+                            <> metavar "PORT")
                         <*> strOption (short 'c' 
-                                    <> long "channel"
-                                    <> help "IRC channel to use"
-                                    <> metavar "CHAN")
+                            <> long "channel"
+                            <> help "IRC channel to use"
+                            <> metavar "CHAN")
                         <*> strOption (short 'u' 
-                                    <> long "user" 
-                                    <> help "IRC user name"
-                                    <> metavar "USER")
+                            <> long "user" 
+                            <> help "IRC user name"
+                            <> metavar "USER")
                         <*> strOption (short 'n' 
-                                    <> long "nickname"
-                                    <> help "IRC nick name"
-                                    <> value "WhatIsBot"
-                                    <> metavar "NICK")
+                            <> long "nickname"
+                            <> help "IRC nick name"
+                            <> value "WhatIsBot"
+                            <> metavar "NICK")
                         <*> strOption (short 'd' 
-                                    <> long "directory"
-                                    <> help "Directory in which resources files are located"
-                                    <> value "resources"
-                                    <> metavar "DIR")
+                            <> long "directory"
+                            <> help "Directory in which resources files are located"
+                            <> value "resources"
+                            <> metavar "DIR")
 
 -- | Informations needed by the Bot.
 data Infos = Infos 
